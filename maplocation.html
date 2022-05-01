@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>물품보관소 알리미란?</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/1.png" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/font.css" type="text/css"/>
+        <link href="box.css" type="text/css" rel="stylesheet">
+
+        
+    </head>
+    <body style="height: 100%;">
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#!" onclick="location.href='index.html'">물품보관소 알리미</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="#!" onclick="location.href='login.html'">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='introduce.html'">물품보관소 알리미란?
+                        </a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='list.html'">공지사항</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!" onclick="location.href='made.html'">개발자정보</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="map" style="width:100%;height:350px;"></div>
+
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a147224b320aa685c5cd53fe3ae35b88"></script>
+        <script>
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div  
+            mapOption = { 
+                center: new kakao.maps.LatLng(37.456354, 126.704561), // 지도의 중심좌표
+                level: 9 // 지도의 확대 레벨
+            };
+        
+        var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성
+         
+        // 마커를 표시할 위치와 내용을 가지고 있는 객체 배열 
+        var positions = [
+            {
+                content: '<div>간석오거리역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.467234, 126.706506)
+            },
+            {
+                content: '<div>갈산역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.517030, 126.721574)
+            },
+            {
+                content: '<div>경인교대입구역/지하1층</div>', 
+                latlng: new kakao.maps.LatLng(37.538228, 126.722591)
+            },
+            {
+                content: '<div>계산역/지하2층</div>',
+                latlng: new kakao.maps.LatLng(37.543234, 126.728490)
+            },
+            {
+                content: '<div>계양역/지상1층</div>',
+                latlng: new kakao.maps.LatLng(37.571092, 126.736069)
+            },
+            {
+                content: '<div>국제업무지구역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.400378, 126.630084)
+            },
+            {
+                content: '<div>문학경기장역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.434910, 126.698354)
+            },
+            {
+                content: '<div>박촌역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.553506, 126.744968)
+            },
+            {
+                content: '<div>부평역(대한극장)/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.491159, 126.721697)
+            },
+            {
+                content: '<div>부평구청역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.508061, 126.720862)
+            },
+            {
+                content: '<div>부평시장역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.498440, 126.722276)
+            },
+            {
+                content: '<div>선학역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.427002, 126.698952)
+            },
+            {
+                content: '<div>센트럭파크역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.393472, 126.634876)
+            },
+            {
+                content: '<div>예술회관역/지하2층</div>',
+                latlng: new kakao.maps.LatLng(37.449287, 126.701050)
+            },
+            {
+                content: '<div>신역수역/지하1층</div>',
+                latlng: new kakao.maps.LatLng(37.418113, 126.694047)
+            },
+            {
+                content: '<div>광주송정역/5번 출구 입장 후 좌측</div>',
+                latlng: new kakao.maps.LatLng(35.137477206981664, 126.79152423247618)
+            },
+            {
+                content: '<div>금남로4가역/1번 출구 우측 40M</div>',
+                latlng: new kakao.maps.LatLng(35.15072766508977, 126.91451426519791)
+            },
+            {
+                content: '<div>금남로5가역</div><div>1,2,5,6번 출구(개찰구앞)</div>',
+                latlng: new kakao.maps.LatLng(35.15418737835292, 126.90933596018334)
+            },
+            {
+                content: '<div>남광주역/4번 출구 좌측 20M</div>',
+                latlng: new kakao.maps.LatLng(35.13930181888097, 126.92297263757143)
+            },
+            {
+                content: '<div>농성역/4번 출구 입장 후 우측</div>',
+                latlng: new kakao.maps.LatLng(35.15329346219379, 126.88374640895063)
+            },
+            {
+                content: '<div>돌고개역/1,2,3,4번 출구 진입 후 벽쪽</div>',
+                latlng: new kakao.maps.LatLng(35.151663197575125, 126.89492636090527)
+            },
+            {
+                content: '<div>문화전당역</div><div>3,4번 출구(6호 E/V 정면)</div>',
+                latlng: new kakao.maps.LatLng(35.146605353130546, 126.9198820829507)
+            },
+            {
+                content: '<div>상무역/5,6번 출구 입장 후 정면 10M</div>',
+                latlng: new kakao.maps.LatLng(35.14666338664357, 126.84855147578244)
+            },
+            {
+                content: '<div>송정공원역</div><div>3,4번 출구 입장 후 우측 10M</div>',
+                latlng: new kakao.maps.LatLng(35.14355661825773, 126.79937672973797)
+            },
+            {
+                content: '<div>쌍촌역/1~4번 출구 사이</div>',
+                latlng: new kakao.maps.LatLng(35.15159794998879, 126.86952849234524)
+            },
+            {
+                content: '<div>양동시장역</div><div>1번 출구 입장 후 우측</div>',
+                latlng: new kakao.maps.LatLng(35.15432980026638, 126.90127194819152)
+            },
+            {
+                content: '<div>운천역/1,2번 출구 좌측 10M</div>',
+                latlng: new kakao.maps.LatLng(35.15047938489889, 126.85869850509599)
+            },
+            {
+                content: '<div>평동역/2번 출구 입장 후 발매기 옆</div>',
+                latlng: new kakao.maps.LatLng(35.124744009082505, 126.76955988765957)
+            },
+            {
+                content: '<div>학동증심사입구역</div><div>4번 출구 입장 후 좌측</div>',
+                latlng: new kakao.maps.LatLng(35.1327387090972, 126.92838530487633)
+            },
+            {
+                content: '<div>화정역/1번 출구 우측</div>',
+                latlng: new kakao.maps.LatLng(35.15197722337995, 126.8766531738372)
+            },
+            {
+                content: '<div>갈마역/1,2번 출구 입장 후 대합실 오른쪽</div>',
+                latlng: new kakao.maps.LatLng(36.35758396882592, 127.37270870789507)
+            },
+            {
+                content: '<div>구암역/1,2번 출구 입장 후 대합실 왼쪽</div>',
+                latlng: new kakao.maps.LatLng(36.35670269516696, 127.33074092965784)
+            },
+            {
+                content: '<div>노은역/4번 출구 앞</div>',
+                latlng: new kakao.maps.LatLng(36.37413703662061, 127.31787681449266)
+            },
+            {
+                content: '<div>대전역/4번 출구 좌측 20M</div>',
+                latlng: new kakao.maps.LatLng(36.33154438371911, 127.43290343470966)
+            },
+            {
+                content: '<div>서대전네거리역</div><div>1,2,7,8번 출구 우측 10M</div>',
+                latlng: new kakao.maps.LatLng(36.32240624666001, 127.41257637377159)
+            },
+            {
+                content: '<div>시청역/1,2번 출구 좌측 5M</div>',
+                latlng: new kakao.maps.LatLng(36.35149699066121, 127.38674458953666)
+            },
+            {
+                content: '<div>용문역/7,8번 출구 좌측</div>',
+                latlng: new kakao.maps.LatLng(36.33816940781851, 127.39340084285243)
+            },
+            {
+                content: '<div>월평역(한국과학기술원)</div><div>4번 출구 입장 후 대합실 왼쪽</div>',
+                latlng: new kakao.maps.LatLng(36.358266942908934, 127.3645675405555)
+            },
+            {
+                content: '<div>유성온천역(충남대,목원대)</div><div>7,8번출구 입장 후 고객센터 우측</div>',
+                latlng: new kakao.maps.LatLng(36.35370773393439, 127.34144018161538)
+            },
+            {
+                content: '<div>정부청사역/1,2번 출구 앞</div>',
+                latlng: new kakao.maps.LatLng(36.35748491567332, 127.38125366469365)
+            },
+            {
+                content: '<div>중앙로역/4번 출구 정면 15M</div>',
+                latlng: new kakao.maps.LatLng(36.32867704006259, 127.42582377588572)
+            },
+            {
+                content: '<div>지족역(침신대)</div><div>2번 출구 왼쪽</div>',
+                latlng: new kakao.maps.LatLng(36.384092936942, 127.31949158953239)
+            },
+            {
+                content: '<div>탄방역/4,5번 출구 정면 20M</div>',
+                latlng: new kakao.maps.LatLng(36.34554503082791, 127.38455684489227)
+            },
+            {
+                content: '<div>동래역/5,7번 출구 앞 만남의 광장</div>',
+                latlng: new kakao.maps.LatLng(35.20560972241043, 129.0784764184678)
+            },
+            {
+                content: '<div>동부산대학역(윗반송)</div><div>2,4번 출입구와 개찰구 왼쪽</div>',
+                latlng: new kakao.maps.LatLng(35.232395268640424, 129.1537668324436)
+            },
+            {
+                content: '<div>미남역/1,2,3,4번 출구 사이</div>',
+                latlng: new kakao.maps.LatLng(35.20539957941353, 129.0679912197991)
+            },
+            {
+                content: '<div>수안역/1,3번 출구 좌측 화장실 옆</div>',
+                latlng: new kakao.maps.LatLng(35.20174631892288, 129.08383170724505)
+            },
+            {
+                content: '<div>안평역(고촌주택단지)</div><div>2,4번 출입구와 개찰구 사이</div>',
+                latlng: new kakao.maps.LatLng(35.23737266072557, 129.17173842255954)
+            },
+            {
+                content: '<div>영산대역(아랫반송)</div><div>2번 출구 입장 후 오른쪽</div>',
+                latlng: new kakao.maps.LatLng(35.22556123159752, 129.14609921409922)
+            },
+            {
+                content: '<div>충렬사역(안락)</div><div>1,2번 출구 사이 남자화장실 옆</div>',
+                latlng: new kakao.maps.LatLng(35.20027386518377, 129.09786324975573)
+            },             
+            {
+                content: '<div>각산역</div><div>4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.86799657614447, 128.72421575074597),
+            },
+            {
+                content: '<div>대곡(정부대구청사)</div><div>4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.809571999291634, 128.5127463646389),
+            },
+            {
+                content: '<div>대구역</div><div>1번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.87632891509224, 128.59703275968556),
+            },
+            {
+                content: '<div>대명역</div><div>1번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.83932955043698, 128.56593056026924),
+            },         
+            {
+                content: '<div>동대구역</div><div>1,2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.877552297945755, 128.6278996605778),
+            },
+            {
+                content: '<div>명덕역(2.28민주운동기념회관)</div><div>6번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85695254353958, 128.59003538103053),
+            },
+            {
+                content: '<div>반월당(2.28민주운동기념회관)</div><div>23번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.86547335658769, 128.59356836826788),
+            },
+            {
+                content: '<div>방촌역</div><div>1번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.87964573172142, 128.67018758141808),
+            },
+            {
+                content: '<div>상인역</div><div>7번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.81892627927816, 128.53775801080613),
+            },
+            {
+                content: '<div>성당못역</div><div>1번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.83718122590175, 128.5571924915075),
+            },
+            {
+                content: '<div>신기역</div><div>4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.866702134979214, 128.70188009773102),
+            },
+            {
+                content: '<div>신천역(경북대입구)</div><div>2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.87468725634847, 128.61785404783436),
+            },
+            {
+                content: '<div>아양교역</div><div>3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.88723771961109, 128.63995239515154),
+            },
+            {
+                content: '<div>안심역(혁신도시·첨복단지)</div><div>1번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.871224911242805, 128.73375726994036),
+            },
+            {
+                content: '<div>안지랑역</div>',
+                latlng: new kakao.maps.LatLng(35.839250372599444, 128.57371478095442),
+            },
+            {
+                content: '<div>영대병원역</div><div>2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.84418025902934, 128.58805100001337),
+            },
+            {
+                content: '<div>월배역</div><div>2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.81619042245072, 128.5304112607559),
+            },
+            {
+                content: '<div>월촌역</div><div>7번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.82369354702144, 128.54547382541514),
+            },
+            {
+                content: '<div>중앙로역</div><div>1,3,4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.870852328911184, 128.593972257158),
+            },
+            {
+                content: '<div>진천역</div><div>2번 출구</div>',
+                  latlng: new kakao.maps.LatLng(35.813884162709385, 128.5230842804569),
+            },
+            {
+                content: '<div>칠성시장역</div><div>3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.87609938142612, 128.60512475488133),
+            },
+            {
+                content: '<div>큰고개역</div><div>2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.88403740357996, 128.63194405534995),
+            },
+            {
+                content: '<div>감삼역</div><div>1,4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85430999476029, 128.54811851589335),
+            },
+            {
+                content: '<div>경대병원역</div>',
+                latlng: new kakao.maps.LatLng(35.863148202935456, 128.60289573974327),
+            },
+            {
+                content: '<div>계명대역</div><div>1,2,3,7번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.851523270707396, 128.49184492281464),
+            },
+            {
+                content: '<div>내당역</div><div>2,3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.86012684100514, 128.56464310681267),
+            },
+            {
+                content: '<div>대구은행역</div>',
+                latlng: new kakao.maps.LatLng(35.85976967727183, 128.6141107912936),
+            },
+            {
+                content: '<div>두류역</div><div>1,2번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85721778550458, 128.55566927018677),
+            },
+            {
+                content: '<div>반고개역</div><div>2,3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.86012684100514, 128.56464310681267),
+            },
+            {
+                content: '<div>반월당역</div>',
+                latlng: new kakao.maps.LatLng(35.86546914574821, 128.59354614232774),
+            },
+            {
+                content: '<div>범어역</div>',
+                latlng: new kakao.maps.LatLng(35.859019534369416, 128.62679825182911),
+            },
+            {
+                content: '<div>사월역</div><div>2,3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.83703756468137, 128.71530077237642),
+            },
+            {
+                content: '<div>성서산업단지역</div><div>2,3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85171022090933, 128.50701025807754),
+            },
+            {
+                content: '<div>수성구청역(KBS)</div>',
+                  latlng: new kakao.maps.LatLng(35.85880493693893, 128.63563311578207),
+            },
+            {
+                content: '<div>신남역</div><div>1,9번 출구</div>',
+                latlng: new kakao.maps.LatLng(5.864910405634845, 128.5824725152206),
+            },
+            {
+                content: '<div>신매역</div><div>1,7번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.84081400267549, 128.705122824925),
+            },
+            {
+                content: '<div>용산역(서부법원 검찰청입구)</div><div>2,3,4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.84908290235568, 128.52879899310338),
+            },
+            {
+                content: '<div>이곡역</div><div>2,3번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85061092818313, 128.51577537542124),
+            },
+            {
+                content: '<div>죽전역</div><div>1,2,3,4번 출구</div>',
+                latlng: new kakao.maps.LatLng(35.85072153984847, 128.53879519290277),
+            }
+               
+        ];
+        
+        for (var i = 0; i < positions.length; i ++) {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng // 마커의 위치
+            });
+        
+            // 마커에 표시할 인포윈도우를 생성합니다 
+            var infowindow = new kakao.maps.InfoWindow({
+                content: positions[i].content // 인포윈도우에 표시할 내용
+            });
+        
+            // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록
+            // 이벤트 리스너로는 클로저를 만들어 등록
+            // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록
+            kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+            kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+        }
+        
+        // 인포윈도우를 표시하는 클로저를 만드는 함수 
+        function makeOverListener(map, marker, infowindow) {
+            return function() {
+                infowindow.open(map, marker);
+            };
+        }
+        
+        // 인포윈도우를 닫는 클로저를 만드는 함수 
+        function makeOutListener(infowindow) {
+            return function() {
+                infowindow.close();
+            };
+        }
+        
+        
+        /*
+        for (var i = 0; i < positions.length; i ++) {
+            // 마커를 생성합니다
+            var marker = new kakao.maps.Marker({
+                map: map, // 마커를 표시할 지도
+                position: positions[i].latlng // 마커의 위치
+            });
+        
+            // 마커에 표시할 인포윈도우를 생성합니다 
+            var infowindow = new kakao.maps.InfoWindow({
+                content: positions[i].content // 인포윈도우에 표시할 내용
+            });
+        
+            // 마커에 이벤트를 등록하는 함수 만들고 즉시 호출하여 클로저를 만듬
+            // 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됨
+            (function(marker, infowindow) {
+                // 마커에 mouseover 이벤트를 등록하고 마우스 오버 시 인포윈도우를 표시
+                kakao.maps.event.addListener(marker, 'mouseover', function() {
+                    infowindow.open(map, marker);
+                });
+        
+                // 마커에 mouseout 이벤트를 등록하고 마우스 아웃 시 인포윈도우를 닫음
+                kakao.maps.event.addListener(marker, 'mouseout', function() {
+                    infowindow.close();
+                });
+            })(marker, infowindow);
+        }
+        */
+        </script>
+
+
+
+         
+
+
+        <!-- Footer-->
+        <footer class="py-5 bg-secondary">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Astrafe</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
